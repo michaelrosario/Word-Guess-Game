@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <style>
+      html, body { background: #000; }
+      * { font-family: 'Nunito Sans', sans-serif; color: #FFF; }
+      h1 { text-align: center; padding: 30px; display: block; color: #FFF; }
+      #game { display: block; text-align: center; }
+      #game ul { list-style: none; display: block; clear: both; }
+      #game li { display: inline-block; text-align: center; border: 1px solid #FFF; padding: 19px 0px 5px; width: 80px; height: 50px; 
+        border-radius: 3px; 
+        text-transform: uppercase;
+        font-size: 30px; margin: 0 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <h1>Word Guess Game</h1>
+
+    <div id="game">
+
+    </div>
+
+    <script>
+
+      var gameWords = [
+        "Madonna",
+        'Pizza Pie',
+        "Batteries Not Included"
+      ]
+
+
+      function generateGame(arr,id){
+
+         var currentGame = arr[Math.floor(Math.random() * arr.length)];
+         var content = "<ul>";
+         var gameObject = {};
+
+         for(i = 0; i < currentGame.length; i++){
+
+            if(currentGame[i] == " "){
+               content += "</ul><ul>";
+            } else {
+               gameObject[currentGame[i]] = false;
+               content += "<li class='blank'>?</li>";
+            }
+
+         };
+
+         document.getElementById(id).innerHTML = content+"</ul>";
+
+      }
+
+      generateGame(gameWords,'game');
+
+
+    </script>
+    
+  </body>
+</html>
