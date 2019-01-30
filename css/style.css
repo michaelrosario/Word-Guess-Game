@@ -32,6 +32,10 @@ h5 {
   text-align: center; 
 }
 
+#game p {
+  font-size: 30px;
+}
+
 #game ul,
 #score ul { 
   list-style: none; 
