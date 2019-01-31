@@ -1,19 +1,21 @@
-$(document).ready(function(){     
       // VARIABLES
       var gameWords = [
         "Madonna",
         'Pizza Pie',
         "Batteries Not Included",
-        "Short Circuit"
+        "Short Circuit",
+        "Columbia University",
+        "New York City",
+        "Javascript"
+        "Document Object Model"
       ]
 
       var currentGame = [];   // This is the current game word
       var gameObject = {};    // This object keeps track of the letters in play 
       var userInput = [];     // Array to hold all user input
       var inCorrectInput = [] // Array to hold all incorrect input
-       var userLimit = "5";   // Amount of incorrect tries
+      var userLimit = 5;   // Amount of incorrect tries
 
-      
       // Choose a random word and create the ? boxes
       function generateGame(arr,id,obj){
          
@@ -39,7 +41,7 @@ $(document).ready(function(){
          };
 
          // put the content to the game
-        $("#"+id).html(content+"</ul>");
+         document.getElementById(id).innerHTML = content+"</ul>";
 
       }
 
@@ -73,27 +75,40 @@ $(document).ready(function(){
           
         }
 
-        $("#"+id).html(content+"</ul>");
+        document.getElementById(id).innerHTML = content+"</ul>";
         
       }
 
       // gate
       var start = 0;
 
+      // check user input
       document.onkeyup = function(event) {
 
           var userKey = event.key.toLowerCase();
-          var userMessage =  $("#userMessage");
-          var score = $("#score");
+          var userMessage =  document.getElementById("userMessage");
+          var score = document.getElementById("score");
 
+          // this segment runs only once to start the game
           if(start === 0){
+
+            // RESET
+            currentGame = [];   // This is the current game word
+            gameObject = {};    // This object keeps track of the letters in play 
+            userInput = [];     // Array to hold all user input
+            inCorrectInput = [] // Array to hold all incorrect input
+            userLimit = 5;      // Amount of incorrect tries
+            
             generateGame(gameWords,'game',gameObject);
+            userMessage.innerHTML = "";
+            score.innerHTML = "";
+      
             start++;
 
           // check if the user pressed it already
           } else if (userInput.indexOf(userKey) > -1){
 
-            userMessage.html("<p>You entered that already, type another letter.</p>");
+            userMessage.innerHTML = "<p>You entered that already, type another letter.</p>";
 
           // check if the key pressed is a letter or number
           } else if(/^[a-z0-9]$/i.test(event.key) && userLimit > 0){
@@ -114,12 +129,20 @@ $(document).ready(function(){
             for(var j = 0; j < inCorrectInput.length; j++){
               userGuesses += "<li>"+inCorrectInput[j]+"</li>";
             }
-            userMessage.innerHTML = " ";
+            userMessage.innerHTML = "";
             if(inCorrectInput.length){ score.innerHTML = userGuesses+"</ul>"; }
 
             checkAnswer(currentGame,'game',gameObject);
 
-          }
+            if(Object.values(gameObject).indexOf(false) == -1){
+              userMessage.innerHTML = "<div class='endMessage'><h3>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span>Press any key to start again!</span></h3></div>";
+              start = 0; // restart game
+            }
+            if(userLimit === 0) {
+              userMessage.innerHTML = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span>Press any key to start again!</span></h3></div>";
+              start = 0; // restart game
+            }
+
+          } 
 
       }
-});

@@ -1,3 +1,4 @@
+$(document).ready(function(){     
       // VARIABLES
       var gameWords = [
         "Madonna",
@@ -38,7 +39,7 @@
          };
 
          // put the content to the game
-         document.getElementById(id).innerHTML = content+"</ul>";
+        $("#"+id).html(content+"</ul>");
 
       }
 
@@ -72,7 +73,7 @@
           
         }
 
-        document.getElementById(id).innerHTML = content+"</ul>";
+        $("#"+id).html(content+"</ul>");
         
       }
 
@@ -82,8 +83,8 @@
       document.onkeyup = function(event) {
 
           var userKey = event.key.toLowerCase();
-          var userMessage =  document.getElementById("userMessage");
-          var score = document.getElementById("score");
+          var userMessage =  $("#userMessage");
+          var score = $("#score");
 
           if(start === 0){
             generateGame(gameWords,'game',gameObject);
@@ -92,7 +93,7 @@
           // check if the user pressed it already
           } else if (userInput.indexOf(userKey) > -1){
 
-            userMessage.innerHTML = "<p>You entered that already, type another letter.</p>";
+            userMessage.html("<p>You entered that already, type another letter.</p>");
 
           // check if the key pressed is a letter or number
           } else if(/^[a-z0-9]$/i.test(event.key) && userLimit > 0){
@@ -121,3 +122,4 @@
           }
 
       }
+});
