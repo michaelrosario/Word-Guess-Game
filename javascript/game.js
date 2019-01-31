@@ -6,7 +6,7 @@
         "Short Circuit",
         "Columbia University",
         "New York City",
-        "Javascript"
+        "Javascript",
         "Document Object Model"
       ]
 
@@ -134,7 +134,7 @@
 
             checkAnswer(currentGame,'game',gameObject);
 
-            if(Object.values(gameObject).indexOf(false) == -1){
+            if(Object.values(gameObject).indexOf(false) === -1){
               userMessage.innerHTML = "<div class='endMessage'><h3>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span>Press any key to start again!</span></h3></div>";
               start = 0; // restart game
             }
