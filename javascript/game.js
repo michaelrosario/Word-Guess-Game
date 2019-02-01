@@ -15,13 +15,17 @@
       var userInput = [];     // Array to hold all user input
       var inCorrectInput = [] // Array to hold all incorrect input
       var userLimit = 5;   // Amount of incorrect tries
+      var wins = 0;
 
       // Choose a random word and create the ? boxes
       function generateGame(arr,id,obj){
          
          // randomly get a word from gameWords
-         currentGame = arr[Math.floor(Math.random() * arr.length)];
+         var randomIndex = Math.floor(Math.random() * arr.length);
+         currentGame = arr[randomIndex];
          
+         arr.splice(randomIndex,1); // remove item from the array
+
          // start the game HTML and fill in ? boxes
          var content = "<ul>";
          
@@ -135,12 +139,16 @@
             checkAnswer(currentGame,'game',gameObject);
 
             if(Object.values(gameObject).indexOf(false) === -1){
-              userMessage.innerHTML = "<div class='endMessage'><h3>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span>Press any key to start again!</span></h3></div>";
+              wins++;
+              userMessage.innerHTML = "<div class='endMessage'><h3><br>Wins : "+wins+"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span>Press any key to start again!</span></h3></div>";
               start = 0; // restart game
             }
             if(userLimit === 0) {
+            
               userMessage.innerHTML = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span>Press any key to start again!</span></h3></div>";
+              gameWords.push(currentGame); // put back the word
               start = 0; // restart game
+
             }
 
           } 
