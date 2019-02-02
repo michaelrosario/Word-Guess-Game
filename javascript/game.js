@@ -123,7 +123,7 @@
           // check if the key pressed is a letter or number
           } else if(/^[a-z0-9]$/i.test(event.key) && userLimit > 0){
 
-            userInput.push(event.key);
+            userInput.push(userKey);
 
             if(gameObject[userKey] === false){
                gameObject[userKey] = true;
