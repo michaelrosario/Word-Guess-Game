@@ -3,8 +3,9 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Word Guess Game</title>
+    <title>Word Guess Game : Sci-Fi Movies</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
   </head>
 
@@ -13,11 +14,13 @@
     <h1>Word Guess Game : Sci-Fi Movies</h1>
 
     <div id="game">
-      <p>Press any key to get started!</p>
+      <p class='startNew'>Press any key to get started!</p>
     </div>
 
     <div id="score"></div>
     <div id="userMessage"></div>    
+    <a href="#" id="activateKeyword"><i class="fa fa-keyboard"></i></a>
+    <input id="hiddenInput" value="" style="opacity: 0;" />
     <script src="javascript/game.js"></script>
     
   </body>

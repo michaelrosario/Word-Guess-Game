@@ -85,6 +85,13 @@ h5 {
   margin: 0 4px 0;
 }
 
+.startNew { 
+  display: inline-block; 
+  padding: 10px 20px;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+}
+
 .endMessage { 
   display: flex;
   position: absolute; 
@@ -100,3 +107,14 @@ h5 {
 }
 .endMessage h3 { width: 100%; font-size: 50px; }
 .endMessage span { font-size: 20px;  }
+
+#activateKeyword { color: #FFF; font-size: 30px; 
+  position: absolute;
+  bottom: 30px; 
+  left: 30px;
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  #activateKeyword { display: block; }
+} 

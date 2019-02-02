@@ -20,6 +20,14 @@
       var userLimit = 10;     // Amount of incorrect tries
       var wins = 0;
 
+      var mobile = document.getElementById('activateKeyword');
+
+      mobile.addEventListener("click", function(){
+
+          document.getElementById("hiddenInput").focus();
+
+      });
+
       // Choose a random word and create the ? boxes
       function generateGame(arr,id,obj){
          
@@ -146,12 +154,12 @@
 
             if(Object.values(gameObject).indexOf(false) === -1){
               wins++;
-              userMessage.innerHTML = "<div class='endMessage'><h3><br>Wins : "+wins+"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span>Press any key to start again!</span></h3></div>";
+              userMessage.innerHTML = "<div class='endMessage'><h3><br>Wins : "+wins+"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               start = 0; // restart game
             }
             if(userLimit === 0) {
             
-              userMessage.innerHTML = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span>Press any key to start again!</span></h3></div>";
+              userMessage.innerHTML = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               gameWords.push(currentGame); // put back the word
               start = 0; // restart game
 
