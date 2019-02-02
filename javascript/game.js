@@ -17,7 +17,7 @@
       var gameObject = {};    // This object keeps track of the letters in play 
       var userInput = [];     // Array to hold all user input
       var inCorrectInput = [] // Array to hold all incorrect input
-      var userLimit = 5;   // Amount of incorrect tries
+      var userLimit = 10;     // Amount of incorrect tries
       var wins = 0;
 
       // Choose a random word and create the ? boxes
@@ -102,12 +102,12 @@
           // this segment runs only once to start the game
           if(start === 0){
 
-            // RESET
+            // RESET - to restart the game
             currentGame = [];   // This is the current game word
             gameObject = {};    // This object keeps track of the letters in play 
             userInput = [];     // Array to hold all user input
             inCorrectInput = [] // Array to hold all incorrect input
-            userLimit = 5;      // Amount of incorrect tries
+            userLimit = 10;      // Amount of incorrect tries
             
             generateGame(gameWords,'game',gameObject);
             userMessage.innerHTML = "";
