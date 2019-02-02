@@ -1,13 +1,16 @@
       // VARIABLES
       var gameWords = [
-        "Madonna",
-        'Pizza Pie',
         "Batteries Not Included",
         "Short Circuit",
-        "Columbia University",
-        "New York City",
-        "Javascript",
-        "Document Object Model"
+        "Star Wars",
+        "Flight of the Navigator",
+        "Star Trek",
+        "Ready Player One",
+        "Inception",
+        "Back to the Future",
+        "Robocop",
+        "Terminator",
+        "Total Recall"
       ]
 
       var currentGame = [];   // This is the current game word
@@ -50,6 +53,9 @@
       }
 
       // Updates the word with letters chosen by user
+      // arr - is the string with the current word
+      // id - this is the id of the game div
+      // obj - object to keep track of the game true/false 
       function checkAnswer(arr,id,obj){
 
         var content="<ul>";
