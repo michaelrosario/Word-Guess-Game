@@ -10,8 +10,13 @@
         "Back to the Future",
         "Robocop",
         "Terminator",
+        "Ex Machina",
+        "Blade Runner",
         "Total Recall",
-        "The Matrix"
+        "The Matrix",
+        "Minority Report",
+        "Looper",
+        "The Avengers"
       ]
 
       var game = {
@@ -23,11 +28,48 @@
         userLoses: 0,     // Number of loses
       }
 
+
       // ID of the game container
       var gameContainer =  document.getElementById("game");
       
       // gate
       var start = 0;
+
+
+      // check user input
+      document.onkeyup = function(event) {
+
+        // make everything lowercase so it's easier to parse and check
+        var userKey = event.key.toLowerCase();
+
+          // this segment runs only once to start the game
+        if(start === 0){
+
+            // RESET - to restart the game
+          game.currentGame = [];     // This is the current game word
+          game.gameObject = {};      // This object keeps track of the letters in play 
+          game.userInput = [];       // Array to hold all user input
+          game.inCorrectInput = [];  // Array to hold all incorrect input
+          game.userLimit  = 10;      // Amount of incorrect tries
+          
+          // Choose a random word from Game Words
+          var randomIndex = Math.floor(Math.random() * gameWords.length);
+          game.currentGame = gameWords[randomIndex];
+          gameWords.splice(randomIndex,1); // remove item from the array
+
+          generateGame(game);
+          emptyMessage();
+          
+          start++; // update start so this section will not run unless 0
+
+        // check if the user pressed it already
+        } else {
+
+          checkUserInput(userKey);
+
+        }
+      }
+
       
       // Mobile Specific 
       var mobile = document.getElementById('activateKeyword');
@@ -95,21 +137,34 @@
 
       }
 
-
       function updateUserGuesses(obj) {
 
         var guessContainer = document.getElementById("userGuesses");
+        var guessContainerNumber = document.getElementById("userGuessesNumber");
+        var userGuessesList = document.getElementById("userGuessesList");
+        
+      
         // start HTML for user guessed words
-        var userGuesses = "<h5>Incorrect Guesses : You have " + obj.userLimit + " more tries!</h5><ul>";
+        userGuessesNumber.textContent = obj.userLimit;
 
+        // create element of all incorrect user entries
+        var userGuesses = document.createElement("ul"); 
+         
         for(var j = 0; j < obj.inCorrectInput.length; j++){
-          userGuesses += "<li>"+obj.inCorrectInput[j]+"</li>";
+          var incorrectItem = document.createElement('li');
+          incorrectItem.textContent = obj.inCorrectInput[j];
+          userGuesses.appendChild(incorrectItem);  
         }
-        userMessage.innerHTML = "";
         
         if(obj.inCorrectInput.length){ 
 
-          guessContainer.innerHTML = userGuesses+"</ul>"; 
+          guessContainer.style.display = 'block';
+          userGuessesList.innerHTML = "";
+          userGuessesList.appendChild(userGuesses);
+
+        } else {
+
+          guessContainer.style.display = 'none';
 
         }
 
@@ -123,7 +178,7 @@
             if(Object.values(obj.gameObject).indexOf(false) === -1){
               obj.userWins++;
               var message = "<div class='endMessage'><h3><br>Wins : "+ obj.userWins +"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
-              messageContainer.innerHTML = ""; // clear score container
+              messageContainer.style.display = 'none';
               showMessage(message);
               start = 0; // restart game
             }
@@ -132,7 +187,7 @@
             if(obj.userLimit === 0) {
               var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               showMessage(message);
-              messageContainer.innerHTML = ""; // clear score container
+              messageContainer.style.display = 'none';
               gameWords.push(obj.currentGame); // put back the word
               start = 0; // restart game
             }
@@ -186,38 +241,4 @@
 
           } 
 
-      }
-
-      // check user input
-      document.onkeyup = function(event) {
-
-        // make everything lowercase so it's easier to parse and check
-        var userKey = event.key.toLowerCase();
-
-          // this segment runs only once to start the game
-        if(start === 0){
-
-            // RESET - to restart the game
-          game.currentGame = [];     // This is the current game word
-          game.gameObject = {};      // This object keeps track of the letters in play 
-          game.userInput = [];       // Array to hold all user input
-          game.inCorrectInput = [];  // Array to hold all incorrect input
-          game.userLimit  = 10;      // Amount of incorrect tries
-          
-          // Choose a random word from Game Words
-          var randomIndex = Math.floor(Math.random() * gameWords.length);
-          game.currentGame = gameWords[randomIndex];
-          gameWords.splice(randomIndex,1); // remove item from the array
-
-          generateGame(game);
-          emptyMessage();
-          
-          start++; // update start so this section will not run unless 0
-
-        // check if the user pressed it already
-        } else {
-
-          checkUserInput(userKey);
-
-        }
       }

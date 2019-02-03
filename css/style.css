@@ -76,7 +76,8 @@ h5 {
 }
 
 #userGuesses {
-  width: 100%; 
+  width: 100%;
+  display: none;
 }
 
 #userGuesses ul {
