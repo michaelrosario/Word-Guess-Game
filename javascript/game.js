@@ -177,7 +177,7 @@
         // if no more false items in the object, the user wins!
             if(Object.values(obj.gameObject).indexOf(false) === -1){
               obj.userWins++;
-              var message = "<div class='endMessage'><h3>&ldquo;"+ obj.currentGame +"&rdquo;<br><br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><br><strong>Wins</strong> : "+ obj.userWins +", <strong>Loses</strong> : " + obj.userLoses + "<br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              var message = "<div class='endMessage'><h3>&ldquo;"+ obj.currentGame +"&rdquo;<br><br>CON<span class='tile'>G</span>RATULATI<span class='tile'>O</span>NS!!! <br><span class='fireworks'><strong>(firework goes here!)</strong></span><br><br><strong>Wins</strong> : "+ obj.userWins +", <strong>Loses</strong> : " + obj.userLoses + "<br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               messageContainer.style.display = 'none';
               showMessage(message);
               start = 0; // restart game
@@ -186,7 +186,7 @@
             // if limit is now 0, the user loses
             if(obj.userLimit === 0) {
               obj.userLoses++;
-              var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              var message = "<div class='endMessage'><h3>GA<span class='tile'>M</span>E OVER, TR<span class='tile'>Y</span> AGAIN <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               showMessage(message);
               messageContainer.style.display = 'none';
               gameWords.push(obj.currentGame); // put back the word

@@ -128,8 +128,21 @@ h5 {
   align-items: center;
   justify-content: center;
 }
-.endMessage h3 { width: 100%; font-size: 50px; }
-.endMessage span { font-size: 20px;  }
+.endMessage h3 { width: 100%; font-size: 50px; letter-spacing: 0.2em; }
+.endMessage .tile { 
+  border-radius: 3px;
+  padding: 4px 0px; 
+  width: 80px; 
+  border: 1px solid #CCC; 
+  display: inline-block; 
+  text-align: center; 
+  letter-spacing: .01em;
+  margin-right: 6px;
+}
+
+.endMessage .fireworks,
+.endMessage .startNew { font-size: 23px; margin: 20px auto; letter-spacing: normal; }
+
 
 #activateKeyword {  
   font-size: 30px; 
@@ -175,6 +188,8 @@ h5 {
   }
   .endMessage { display: inline-block; padding-top: 50px; }
   .endMessage h3 { width: 100%; font-size: 20px; }
-  .endMessage span { font-size: 15px;  }
+  .endMessage .tile { width: 33px; }
+  .endMessage .fireworks,
+  .endMessage .startNew { font-size: 15px;  }
 
 } 
