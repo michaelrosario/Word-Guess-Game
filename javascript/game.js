@@ -177,7 +177,7 @@
         // if no more false items in the object, the user wins!
             if(Object.values(obj.gameObject).indexOf(false) === -1){
               obj.userWins++;
-              var message = "<div class='endMessage'><h3>&ldquo;"+ obj.currentGame +"&rdquo;<br><br>CON<span class='tile'>G</span>RATULATI<span class='tile'>O</span>NS!!! <br><span class='fireworks'><strong>(firework goes here!)</strong></span><br><br><strong>Wins</strong> : "+ obj.userWins +", <strong>Loses</strong> : " + obj.userLoses + "<br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              var message = "<div class='endMessage'><h3>&ldquo;"+ obj.currentGame +"&rdquo;<br><br>CON<span class='tile'>G</span>RATULATI<span class='tile'>O</span>NS!!! <br><span class='fireworks'><strong>(fireworks goes here!)</strong></span><br><br><strong>Wins</strong> : "+ obj.userWins +", <strong>Loses</strong> : " + obj.userLoses + "<br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               messageContainer.style.display = 'none';
               showMessage(message);
               start = 0; // restart game
