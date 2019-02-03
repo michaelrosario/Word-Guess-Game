@@ -129,7 +129,7 @@
             }
 
             // if limit is now 0, the user loses
-            if(game.userLimit === 0) {
+            if(obj.userLimit === 0) {
               var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
               showMessage(message);
               messageContainer.innerHTML = ""; // clear score container
