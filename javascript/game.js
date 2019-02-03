@@ -21,6 +21,8 @@
       var wins = 0;
 
       var mobile = document.getElementById('activateKeyword');
+      
+      document.getElementById("hiddenInput").focus(); // for mobile devices
 
       mobile.addEventListener("click", function(){
 

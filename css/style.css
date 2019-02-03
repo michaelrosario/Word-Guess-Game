@@ -117,7 +117,12 @@ h5 {
 
 @media only screen and (max-width: 767px) {
   #activateKeyword { display: block; }
-  #game, h1, #score,#hiddenInput { 
+  #hiddenInput { 
+    margin: 0 auto;  
+    width: 100px; 
+    display: inline-block;
+    font-size: 36px;  }
+  #game, h1, #score  { 
     width: 700px; 
     margin: 0 auto; }
   #game li { 
