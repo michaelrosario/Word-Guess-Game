@@ -9,6 +9,8 @@ html, body {
   box-sizing: border-box; 
 }
 
+h1 { background: rgba(0,0,0,0.3); }
+
 h1,h5 { 
   text-align: center; 
   padding: 30px; 
@@ -100,6 +102,11 @@ h5 {
   font-size: 20px;
   margin: 0 4px 0;
 }
+
+#userGuessesNumber { 
+  border: 1px solid #999; 
+  padding: 0 6px; 
+  border-radius: 3px; }
 
 .startNew { 
   display: inline-block; 
