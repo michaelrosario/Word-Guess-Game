@@ -24,7 +24,9 @@
 
       // ID of the game container
       var gameContainer =  document.getElementById("game");
-
+      
+      // gate
+      var start = 0;
       
       // Mobile Specific 
       var mobile = document.getElementById('activateKeyword');
@@ -125,6 +127,64 @@
         
       }
 
+      function checkUserInput(userInput){
+
+        var guessContainer = document.getElementById("userGuesses");
+
+        userKey = userInput;
+
+         if (game.userInput.indexOf(userKey) > -1) {
+
+            showMessage("<p>You entered that already, type another letter.</p>");
+
+          // check if the key pressed is a letter or number
+          } else if(/^[a-z0-9]$/i.test(event.key) && game.userLimit > 0){
+
+            game.userInput.push(userKey); // keep track of all user input
+
+            if(game.gameObject[userKey] === false){
+                
+              game.gameObject[userKey] = true; // update key to true
+            
+            } else {
+               
+               game.inCorrectInput.push(event.key); // keep track of all incorrect input
+               game.userLimit--; // decrement user limit
+
+            }
+
+            // start HTML for user guessed words
+            var userGuesses = "<h5>Incorrect Guesses : You have " + game.userLimit + " more tries!</h5><ul>";
+
+            for(var j = 0; j < game.inCorrectInput.length; j++){
+              userGuesses += "<li>"+game.inCorrectInput[j]+"</li>";
+            }
+            userMessage.innerHTML = "";
+            
+            if(game.inCorrectInput.length){ guessContainer.innerHTML = userGuesses+"</ul>"; }
+
+            checkAnswer(game);
+
+            // if no more false items in the object, the user wins!
+            if(Object.values(game.gameObject).indexOf(false) === -1){
+              game.userWins++;
+              var message = "<div class='endMessage'><h3><br>Wins : "+ game.userWins +"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              guessContainer.innerHTML = ""; // clear score container
+              showMessage(message);
+              start = 0; // restart game
+            }
+
+            // if limit is now 0, the user loses
+            if(game.userLimit === 0) {
+              var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              showMessage(message);
+              guessContainer.innerHTML = ""; // clear score container
+              gameWords.push(game.currentGame); // put back the word
+              start = 0; // restart game
+            }
+          } 
+
+      }
 
       function showMessage(msg) {
 
@@ -140,73 +200,31 @@
         
       }
 
-
-      // gate
-      var start = 0;
-
       // check user input
       document.onkeyup = function(event) {
 
-          var userKey = event.key.toLowerCase();
-          var score = document.getElementById("score");
+        // make everything lowercase so it's easier to parse and check
+        var userKey = event.key.toLowerCase();
 
           // this segment runs only once to start the game
-          if(start === 0){
+        if(start === 0){
 
             // RESET - to restart the game
-            game.currentGame = [];     // This is the current game word
-            game.gameObject = {};      // This object keeps track of the letters in play 
-            game.userInput = [];       // Array to hold all user input
-            game.inCorrectInput = [];  // Array to hold all incorrect input
-            game.userLimit  = 10;      // Amount of incorrect tries
+          game.currentGame = [];     // This is the current game word
+          game.gameObject = {};      // This object keeps track of the letters in play 
+          game.userInput = [];       // Array to hold all user input
+          game.inCorrectInput = [];  // Array to hold all incorrect input
+          game.userLimit  = 10;      // Amount of incorrect tries
         
-            generateGame(gameWords,game);
-            emptyMessage();
-            score.innerHTML = "";
-      
-            start++;
+          generateGame(gameWords,game);
+          emptyMessage();
+          
+          start++; // update start so this section will not run unless 0
 
-          // check if the user pressed it already
-          } else if (game.userInput.indexOf(userKey) > -1){
+        // check if the user pressed it already
+        } else {
 
-            showMessage("<p>You entered that already, type another letter.</p>");
+          checkUserInput(userKey);
 
-          // check if the key pressed is a letter or number
-          } else if(/^[a-z0-9]$/i.test(event.key) && game.userLimit > 0){
-
-            game.userInput.push(userKey);
-
-            if(game.gameObject[userKey] === false){
-               game.gameObject[userKey] = true;
-            } else {
-               game.inCorrectInput.push(event.key);
-               game.userLimit--; // decrenent user limit
-            }
-
-            // start HTML for user guessed words
-
-            var userGuesses = "<h5>Incorrect Guesses : You have " + game.userLimit + " more tries!</h5><ul>";
-
-            for(var j = 0; j < game.inCorrectInput.length; j++){
-              userGuesses += "<li>"+game.inCorrectInput[j]+"</li>";
-            }
-            userMessage.innerHTML = "";
-            
-            if(game.inCorrectInput.length){ score.innerHTML = userGuesses+"</ul>"; }
-
-            checkAnswer(game);
-
-            if(Object.values(game.gameObject).indexOf(false) === -1){
-              game.userWins++;
-              var message = "<div class='endMessage'><h3><br>Wins : "+ game.userWins +"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
-              showMessage(message);
-              start = 0; // restart game
-            }
-            if(game.userLimit === 0) {
-              var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
-              showMessage(messsage);
-              gameWords.push(game.currentGame); // put back the word
-              start = 0; // restart game
-            }
-          } 
         }
+      }

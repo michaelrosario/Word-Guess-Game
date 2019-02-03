@@ -1,5 +1,5 @@
 html, body { 
-  background: #000;
+  background: #444;
   padding: 0; 
   margin: 0; 
 }
@@ -75,15 +75,21 @@ h5 {
   padding: 0;
 }
 
-#score { 
-  margin: 0 auto; 
+#userGuesses {
+  width: 100%; 
+}
+
+#userGuesses ul {
+  clear: both;
+  margin: 10px auto 50px; 
   display: block; 
   text-align: center; 
   width: 100%; 
-  padding: 0px 0; 
+  padding: 0px;
+  list-style: none;
 }
 
-#score li { 
+#userGuesses li { 
   padding: 0;
   display: inline;
   list-style: none;
@@ -131,7 +137,7 @@ h5 {
     width: 100px; 
     display: inline-block;
     font-size: 36px;  }
-  #game, h1, #score  { 
+  #game, h1, #userGuesses  { 
     width: 700px; 
     margin: 0 auto; }
   #game li { 
