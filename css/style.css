@@ -124,7 +124,8 @@ h5 {
 .endMessage h3 { width: 100%; font-size: 50px; }
 .endMessage span { font-size: 20px;  }
 
-#activateKeyword { color: #FFF; font-size: 30px; 
+#activateKeyword {  
+  font-size: 40px; 
   position: absolute;
   bottom: 30px; 
   left: 30px;
@@ -132,7 +133,20 @@ h5 {
 }
 
 @media only screen and (max-width: 767px) {
-  #activateKeyword { display: block; }
+  
+  #activateKeyword { 
+    display: block; 
+    text-decoration: none;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    padding: 20px;
+    color: #FFF;
+    opacity: 0.7;
+  }
+  #activateKeyword:hover {
+    opacity: 1;
+  }
+
   #hiddenInput { 
     margin: 0 auto;  
     width: 100px; 
