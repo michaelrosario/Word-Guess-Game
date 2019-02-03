@@ -25,20 +25,21 @@
       // ID of the game container
       var gameContainer =  document.getElementById("game");
 
-      var mobile = document.getElementById('activateKeyword');
       
+      // Mobile Specific 
+      var mobile = document.getElementById('activateKeyword');
       document.getElementById("hiddenInput").focus(); // for mobile devices
-
       // Enable mobile keyword by focusing on a hidden input field
       mobile.addEventListener("click", function(){
         document.getElementById("hiddenInput").focus();
       });
 
+
       // Choose a random word and create the ? boxes
       // arr - the gamewords
       // id  - the game container
       // obj - the curret game
-      function generateGame(arr,obj){
+      function generateGame(arr,obj) {
          
          // randomly get a word from gameWords
          var randomIndex = Math.floor(Math.random() * arr.length);
@@ -48,25 +49,34 @@
          arr.splice(randomIndex,1); // remove item from the array
 
          // start the game HTML and fill in ? boxes
-         var content = "<ul>";
+         var content = document.createElement("ul"); 
          
          for(i = 0; i < obj.currentGame.length; i++){
 
             if(obj.currentGame[i] == " "){
             
-               content += "</ul><ul>";
+              var space = document.createElement('li');
+              space.setAttribute('class','space');
+              content.appendChild(space);
             
             } else {
 
-               // assign letter as keys to the object
-               obj.gameObject[obj.currentGame[i].toLowerCase()] = false;
-               content += "<li class='blank'>?</li>";
+              // assign letter as keys to the object
+              obj.gameObject[obj.currentGame[i].toLowerCase()] = false;
+              
+              // create empty '?' boxes
+              var blank = document.createElement('li');
+              blank.setAttribute('class','blank');
+              blank.textContent = "?";
+              content.appendChild(blank);
+
             }
 
-         };
+        };
 
-         // put the content to the game
-         gameContainer.innerHTML = content+"</ul>";
+        // put the content to the game
+        gameContainer.innerHTML = "";
+        gameContainer.appendChild(content);
 
       }
 
@@ -74,9 +84,9 @@
       // arr - is the string with the current word
       // id - this is the id of the game div
       // obj - object to keep track of the game true/false 
-      function checkAnswer(obj){
+      function checkAnswer(obj) {
 
-        var content="<ul>";
+        var content = document.createElement("ul"); 
         var arr = obj.currentGame;
         var gameObject = obj.gameObject;
 
@@ -84,7 +94,9 @@
 
             if(arr[i] == " "){
 
-               content += "</ul><ul>";
+               var space = document.createElement('li');
+               space.setAttribute('class','space');
+               content.appendChild(space);
 
             } else {
 
@@ -92,20 +104,42 @@
                 if(gameObject[arr[i].toLowerCase()]){
 
                   // display the letter
-                  content += "<li class='blank answer'>"+arr[i]+"</li>";
+                  var answer = document.createElement('li');
+                  answer.setAttribute('class','blank answer');
+                  answer.textContent = arr[i];
+                  content.appendChild(answer);
 
                 } else {
 
-                  // display the ?
-                  content += "<li class='blank'>?</li>";
+                  var blank = document.createElement('li');
+                  blank.setAttribute('class','blank');
+                  blank.textContent = "?";
+                  content.appendChild(blank);
 
                 }
             }
         }
 
-        gameContainer.innerHTML = content+"</ul>";
+        gameContainer.innerHTML = "";
+        gameContainer.appendChild(content);
         
       }
+
+
+      function showMessage(msg) {
+
+        var userMessage =  document.getElementById("userMessage");
+        userMessage.innerHTML = msg;
+
+      }
+
+      function emptyMessage() {
+
+        var userMessage =  document.getElementById("userMessage");
+        userMessage.innerHTML = "";
+        
+      }
+
 
       // gate
       var start = 0;
@@ -113,9 +147,7 @@
       // check user input
       document.onkeyup = function(event) {
 
-          console.log("userWins",game.userWins);
           var userKey = event.key.toLowerCase();
-          var userMessage =  document.getElementById("userMessage");
           var score = document.getElementById("score");
 
           // this segment runs only once to start the game
@@ -129,7 +161,7 @@
             game.userLimit  = 10;      // Amount of incorrect tries
         
             generateGame(gameWords,game);
-            userMessage.innerHTML = "";
+            emptyMessage();
             score.innerHTML = "";
       
             start++;
@@ -137,7 +169,7 @@
           // check if the user pressed it already
           } else if (game.userInput.indexOf(userKey) > -1){
 
-            userMessage.innerHTML = "<p>You entered that already, type another letter.</p>";
+            showMessage("<p>You entered that already, type another letter.</p>");
 
           // check if the key pressed is a letter or number
           } else if(/^[a-z0-9]$/i.test(event.key) && game.userLimit > 0){
@@ -159,17 +191,20 @@
               userGuesses += "<li>"+game.inCorrectInput[j]+"</li>";
             }
             userMessage.innerHTML = "";
+            
             if(game.inCorrectInput.length){ score.innerHTML = userGuesses+"</ul>"; }
 
             checkAnswer(game);
 
             if(Object.values(game.gameObject).indexOf(false) === -1){
               game.userWins++;
-              userMessage.innerHTML = "<div class='endMessage'><h3><br>Wins : "+ game.userWins +"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              var message = "<div class='endMessage'><h3><br>Wins : "+ game.userWins +"<br>C O N G R A T U L A T I O N S ! ! ! <br><span><strong>(firework goes here!)</strong></span><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              showMessage(message);
               start = 0; // restart game
             }
             if(game.userLimit === 0) {
-              userMessage.innerHTML = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              var message = "<div class='endMessage'><h3>SORRY YOU DON'T HAVE ANY MORE TRIES ! ! ! <br><br><span class='startNew'>Press any key to start again!</span></h3></div>";
+              showMessage(messsage);
               gameWords.push(game.currentGame); // put back the word
               start = 0; // restart game
             }

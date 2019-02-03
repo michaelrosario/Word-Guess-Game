@@ -66,6 +66,15 @@ h5 {
   font-weight: bold; 
 }
 
+#game .space { 
+  border: none;
+  height: 1px;
+  margin: 0;
+  width: 100%;
+  clear: both;
+  padding: 0;
+}
+
 #score { 
   margin: 0 auto; 
   display: block; 
