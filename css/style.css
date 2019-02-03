@@ -117,5 +117,22 @@ h5 {
 
 @media only screen and (max-width: 767px) {
   #activateKeyword { display: block; }
-  #game, h1, #score,#hiddenInput { width: 700px; margin: 0 auto; }
+  #game, h1, #score,#hiddenInput { 
+    width: 700px; 
+    margin: 0 auto; }
+  #game li { 
+    padding: 13px 0px 13px; 
+    width: 50px; 
+    height: 50px; 
+    font-size: 18px;
+  }
+  h1 { font-size: 20px; }
+  H5 { font-size: 17px; }
+  #game p {
+    font-size: 15px;
+  }
+  .endMessage { display: inline-block; padding-top: 50px; }
+  .endMessage h3 { width: 100%; font-size: 20px; }
+  .endMessage span { font-size: 15px;  }
+
 } 
