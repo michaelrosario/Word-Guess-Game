@@ -234,6 +234,8 @@
 
             }
 
+            emptyMessage(); // clear messages
+
             updateUserGuesses(game); // show incorrect input
 
             generateGame(game); // update game screen
